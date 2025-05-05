@@ -2,37 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import RenderTag from "./RenderTag";
 import { getHotQuestions } from "@/lib/actions/question.action";
-
-const popularTags = [
-  {
-    _id: "1",
-    name: "JavaScript",
-    numberOfQuestions: 20152,
-  },
-  {
-    _id: "2",
-    name: "Next Js",
-    numberOfQuestions: 2023,
-  },
-  {
-    _id: "3",
-    name: "Python",
-    numberOfQuestions: 3240,
-  },
-  {
-    _id: "4",
-    name: "C++",
-    numberOfQuestions: 1209,
-  },
-  {
-    _id: "5",
-    name: "Node Js",
-    numberOfQuestions: 1800,
-  },
-];
+import { getTopPopularTags } from "@/lib/actions/tag.actions";
 
 const RightSidebar = async () => {
   const hotQuestions = await getHotQuestions();
+  const popularTags = await getTopPopularTags();
 
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar sticky right-0 top-0 flex h-screen w-[350px] flex-col overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden">
