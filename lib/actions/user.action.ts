@@ -17,6 +17,7 @@ import Question from "@/database/question.model";
 import { FilterQuery } from "mongoose";
 import Tag from "@/database/tag.model";
 import Answer from "@/database/answer.model";
+import { Regex } from "lucide-react";
 
 export async function getUserById(params: GetUserByIdParams) {
   try {
@@ -86,7 +87,18 @@ export async function deleteUser(deleteUser: DeleteUserParams) {
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
     connectToDatabase();
-    const users = await User.find({}).sort({ createdAt: -1 });
+
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof Question> = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { name: { $regex: new RegExp(searchQuery, "i") } },
+        { userName: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+    const users = await User.find(query).sort({ createdAt: -1 });
     return { users };
   } catch (error) {
     console.log(error);

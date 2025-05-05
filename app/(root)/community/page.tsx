@@ -1,13 +1,16 @@
 import Link from "next/link";
+import { SearchParamsProps } from "@/types";
 import Filter from "@/components/shared/Filter";
+import { Button } from "@/components/ui/button";
 import { UserFilters } from "@/constants/filters";
 import UserCard from "@/components/cards/UserCard";
 import { getAllUsers } from "@/lib/actions/user.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { Button } from "@/components/ui/button";
 
-const page = async () => {
-  const result = await getAllUsers({});
+const page = async ({ searchParams }: SearchParamsProps) => {
+  const { q } = await searchParams;
+
+  const result = await getAllUsers({ searchQuery: q });
 
   return (
     <>
@@ -15,7 +18,7 @@ const page = async () => {
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
-          route="/"
+          route="/community"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search amazing minds here..."
