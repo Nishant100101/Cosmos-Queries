@@ -6,6 +6,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import React from "react";
 import "./globals.css";
 
+
 export const metadata: Metadata = {
   title: "Cosmos Queries",
   description:
@@ -33,9 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <ClerkProvider
+    <ClerkProvider dynamic
           appearance={{
             elements: {
               formButtonPrimary: "primary-gradient",
@@ -43,9 +42,12 @@ export default function RootLayout({
             },
           }}
         >
+    <html lang="en">
+      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        
           <ThemeProvider>{children} </ThemeProvider>
-        </ClerkProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
