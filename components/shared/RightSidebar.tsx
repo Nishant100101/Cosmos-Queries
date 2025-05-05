@@ -1,32 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import RenderTag from "./RenderTag";
-
-const hotQuestions = [
-  {
-    _id: 1,
-    title:
-      "How to Ensure Unique User Profile with ON CONFLICT in PostgreSQL Using Drizzle ORM?",
-  },
-  {
-    _id: 2,
-    title:
-      "What are the benefits and trade-offs of using Server-Side Rendering (SSR) in Next.js?",
-  },
-  {
-    _id: 3,
-    title: "How to center a div?",
-  },
-  {
-    _id: 4,
-    title:
-      "Node.js res.json() and res.send(), not working but still able to change status code",
-  },
-  {
-    _id: 5,
-    title: "ReactJs or NextJs for begginers i ask for advice",
-  },
-];
+import { getHotQuestions } from "@/lib/actions/question.action";
 
 const popularTags = [
   {
@@ -57,6 +32,8 @@ const popularTags = [
 ];
 
 const RightSidebar = async () => {
+  const hotQuestions = await getHotQuestions();
+
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar sticky right-0 top-0 flex h-screen w-[350px] flex-col overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden">
       <div>
