@@ -10,10 +10,11 @@ import { getQuestions } from "@/lib/actions/question.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { q } = await searchParams;
+  const { q, filter } = await searchParams;
 
   const result = await getQuestions({
     searchQuery: q,
+    filter,
   });
 
   return (
