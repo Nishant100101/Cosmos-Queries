@@ -3,13 +3,12 @@ import { auth } from "@clerk/nextjs/server";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import { QuestionFilters } from "@/constants/filters";
-import HomeFilters from "@/components/home/HomeFilters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import QuestionCard, { QuestionProps } from "@/components/cards/QuestionCard";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { q } = await searchParams;
+  const { q, filter } = await searchParams;
 
   const { userId } = await auth();
 
@@ -20,6 +19,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   const result = await getSavedQuestions({
     clerkId: userId,
     searchQuery: q,
+    filter,
   });
 
   return (
@@ -40,8 +40,6 @@ export default async function Home({ searchParams }: SearchParamsProps) {
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
-
-      <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {result.questions.length > 0 ? (

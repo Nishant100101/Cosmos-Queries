@@ -17,6 +17,7 @@ import { URLProps } from "@/types";
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { id } = await params;
+  const { page, filter } = await searchParams;
   const result = await getQuestionById({ questionId: id });
 
   const authData = await auth();
@@ -97,6 +98,8 @@ const Page = async ({ params, searchParams }: URLProps) => {
         totalAnswers={result.answers.length}
         questionId={result._id}
         userId={mongoUser._id}
+        page={page}
+        filter={filter}
       />
 
       <Answer

@@ -8,9 +8,9 @@ import { getAllUsers } from "@/lib/actions/user.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 
 const page = async ({ searchParams }: SearchParamsProps) => {
-  const { q } = await searchParams;
+  const { q, filter } = await searchParams;
 
-  const result = await getAllUsers({ searchQuery: q });
+  const result = await getAllUsers({ searchQuery: q, filter });
 
   return (
     <>

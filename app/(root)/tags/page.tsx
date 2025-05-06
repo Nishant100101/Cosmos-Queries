@@ -7,10 +7,11 @@ import { getAllTags } from "@/lib/actions/tag.actions";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 
 const page = async ({ searchParams }: SearchParamsProps) => {
-  const { q } = await searchParams;
+  const { q, filter } = await searchParams;
 
   const result = await getAllTags({
     searchQuery: q,
+    filter,
   });
 
   return (
