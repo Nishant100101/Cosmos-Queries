@@ -6,9 +6,10 @@ import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import QuestionCard, { QuestionProps } from "@/components/cards/QuestionCard";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
+import Pagination from "@/components/shared/Pagination";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { q, filter } = await searchParams;
+  const { q, filter, page } = await searchParams;
 
   const { userId } = await auth();
 
@@ -20,6 +21,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
     clerkId: userId,
     searchQuery: q,
     filter,
+    page: page ? +page : 1,
   });
 
   return (
@@ -64,6 +66,10 @@ export default async function Home({ searchParams }: SearchParamsProps) {
             linkTitle="Explore Questions"
           />
         )}
+      </div>
+
+      <div className="mt-10">
+        <Pagination pageNumber={page ? +page : 1} isNext={result.isNext} />
       </div>
     </>
   );

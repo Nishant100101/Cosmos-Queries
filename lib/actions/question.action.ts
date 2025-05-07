@@ -24,20 +24,16 @@ export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
-    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
+    const { searchQuery, filter, page = 1, pageSize = 20 } = params;
 
     const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof Question> = {};
 
     if (searchQuery) {
-      const escapedSearchQuery = searchQuery.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
-      );
       query.$or = [
-        { title: { $regex: new RegExp(escapedSearchQuery, "i") } },
-        { content: { $regex: new RegExp(escapedSearchQuery, "i") } },
+        { title: { $regex: new RegExp(searchQuery, "i") } },
+        { content: { $regex: new RegExp(searchQuery, "i") } },
       ];
     }
 

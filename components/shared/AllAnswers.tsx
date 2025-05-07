@@ -10,6 +10,7 @@ import { getTimestamp } from "@/lib/utils";
 import { AnswerFilters } from "@/constants/filters";
 import { getAnswers } from "@/lib/actions/answer.action";
 import { Votes } from "./Votes";
+import Pagination from "./Pagination";
 
 interface Props {
   questionId: object;
@@ -44,20 +45,20 @@ const AllAnswers = async ({
         {result.answers.map((answer) => (
           <article key={answer._id} className="light-border border-b-2 py-10">
             <div className="flex items-center justify-between">
-              <div className="mb-8 flex flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
+              <div className="mb-8 flex flex-1 flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
                 <Link
                   href={`/profile/${answer.author.clerkId}`}
-                  className="flex flex-1 items-start  gap-1 sm:items-center"
+                  className="flex flex-1 items-start gap-1 sm:items-center"
                 >
                   <Image
                     src={answer.author.picture}
-                    width={18}
-                    height={18}
+                    width={20}
+                    height={20}
                     alt="profile"
                     className="rounded-full object-cover max-sm:mt-0.5"
                   />
-                  <div className="flex flex-col sm:flex-row sm:items-center">
-                    <p className="body-semibold text-dark300_light700">
+                  <div className="flex flex-col gap-[2px] sm:flex-row sm:items-center">
+                    <p className="body-semibold  text-dark300_light700 line-clamp-1">
                       {answer.author.name}
                     </p>
 
@@ -67,7 +68,7 @@ const AllAnswers = async ({
                   </div>
                 </Link>
 
-                <div className="flex flex-1 justify-end">
+                <div className="flex justify-end">
                   <Votes
                     type="Answer"
                     itemId={JSON.stringify(answer._id)}
@@ -83,6 +84,10 @@ const AllAnswers = async ({
             <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+
+      <div className="mt-10 w-full">
+        <Pagination pageNumber={page ? +page : 1} isNext={result.isNext} />
       </div>
     </div>
   );
