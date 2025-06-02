@@ -163,7 +163,7 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
     }
 
     await User.findByIdAndUpdate(userId, {
-      $inc: { reputation: hasupVoted ? -1 : 1 },
+      $inc: { reputation: hasupVoted ? -2 : 2 },
     });
 
     await User.findByIdAndUpdate(question.author, {
