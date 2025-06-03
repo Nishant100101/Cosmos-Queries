@@ -7,6 +7,38 @@ import UserCard from "@/components/cards/UserCard";
 import { getAllUsers } from "@/lib/actions/user.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Pagination from "@/components/shared/Pagination";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community | Cosmos Queries",
+  description:
+    "Explore trending questions, top contributors, and recent discussions in the Cosmos Queries community.",
+  keywords: [
+    "cosmos",
+    "community",
+    "top contributors",
+    "trending questions",
+    "discussions",
+    "forum",
+  ],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Community | Cosmos Queries",
+    description:
+      "Explore trending questions, top contributors, and recent discussions in the Cosmos Queries community.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 const page = async ({ searchParams }: SearchParamsProps) => {
   const { q, filter, page } = await searchParams;

@@ -14,6 +14,31 @@ import { auth } from "@clerk/nextjs/server";
 import AllAnswers from "@/components/shared/AllAnswers";
 import { Votes } from "@/components/shared/Votes";
 import { URLProps } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Question Details | Cosmos Queries",
+  description:
+    "Explore the full discussion on this question, view answers, and join the conversation in the Cosmos community.",
+  keywords: ["cosmos", "question", "discussion", "answers", "community", "Q&A"],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Question Details | Cosmos Queries",
+    description:
+      "Explore the full discussion on this question, view answers, and join the conversation in the Cosmos community.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { id } = await params;

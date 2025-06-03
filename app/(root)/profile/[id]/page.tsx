@@ -12,6 +12,39 @@ import AnswersTab from "@/components/shared/AnswersTab";
 import QuestionTab from "@/components/shared/QuestionTab";
 import ProfileLink from "@/components/shared/ProfileLink";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile | Cosmos Queries",
+  description:
+    "View and manage your profile, track your questions and answers, and engage with the Cosmos community.",
+  keywords: [
+    "cosmos",
+    "profile",
+    "user profile",
+    "activity",
+    "questions",
+    "answers",
+    "community",
+  ],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Profile | Cosmos Queries",
+    description:
+      "View and manage your profile, track your questions and answers, and engage with the Cosmos community.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { id } = await params;

@@ -9,6 +9,31 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import { getQuestions } from "@/lib/actions/question.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Pagination from "@/components/shared/Pagination";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Cosmos Queries",
+  description:
+    "Ask and answer the most interesting questions in the Cosmos community.",
+  keywords: ["cosmos", "questions", "answers", "forum", "community"],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Home | Cosmos Queries",
+    description:
+      "Ask and answer the most interesting questions in the Cosmos community.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { q, filter, page } = await searchParams;

@@ -7,6 +7,38 @@ import { getSavedQuestions } from "@/lib/actions/user.action";
 import QuestionCard, { QuestionProps } from "@/components/cards/QuestionCard";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Pagination from "@/components/shared/Pagination";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Collection | Cosmos Queries",
+  description:
+    "View and manage all the questions and answers you've saved in your Cosmos Queries collection.",
+  keywords: [
+    "cosmos",
+    "collection",
+    "saved questions",
+    "saved answers",
+    "favorites",
+    "community",
+  ],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Your Collection | Cosmos Queries",
+    description:
+      "View and manage all the questions and answers you've saved in your Cosmos Queries collection.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { q, filter, page } = await searchParams;

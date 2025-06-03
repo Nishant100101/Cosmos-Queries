@@ -6,6 +6,38 @@ import NoResult from "@/components/shared/NoResult";
 import { getAllTags } from "@/lib/actions/tag.actions";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Pagination from "@/components/shared/Pagination";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tags | Cosmos Queries",
+  description:
+    "Browse all tags used in Cosmos Queries to discover topics and explore related questions in the community.",
+  keywords: [
+    "cosmos",
+    "tags",
+    "topics",
+    "browse tags",
+    "question categories",
+    "community",
+  ],
+  authors: [{ name: "Cosmos Team" }],
+  openGraph: {
+    title: "Tags | Cosmos Queries",
+    description:
+      "Browse all tags used in Cosmos Queries to discover topics and explore related questions in the community.",
+    url: "",
+    siteName: "Cosmos Queries",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+        alt: "Cosmos Queries Preview",
+      },
+    ],
+    type: "website",
+  },
+};
 
 const page = async ({ searchParams }: SearchParamsProps) => {
   const { q, filter, page } = await searchParams;
