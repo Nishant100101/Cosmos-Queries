@@ -1,8 +1,10 @@
 "use client";
 
+import React, { useEffect } from "react";
+
 import Prism from "prismjs";
 import parse from "html-react-parser";
-import { useState, useEffect } from "react";
+
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-java";
 import "prismjs/components/prism-c";
@@ -31,19 +33,11 @@ interface Props {
 }
 
 const ParseHTML = ({ data }: Props) => {
-  const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
-    setIsClient(true);
+    Prism.highlightAll();
   }, []);
 
-  useEffect(() => {
-    if (isClient) {
-      Prism.highlightAll();
-    }
-  }, [isClient]);
-
-  return <div>{isClient && parse(data)}</div>;
+  return <div className={"markdown w-full min-w-full"}>{parse(data)}</div>;
 };
 
 export default ParseHTML;

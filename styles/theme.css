@@ -48,7 +48,7 @@
   }
 
   .text-dark200_light900 {
-    @apply text-dark-200 dark:text-light-900 !important;
+    @apply text-dark-200 dark:text-light-900;
   }
 
   .text-dark200_light800 {

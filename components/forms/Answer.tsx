@@ -34,6 +34,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { mode } = useTheme();
   const editorRef = useRef(null);
+  const [isAISubmitting, setIsAISubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof AnswersSchema>>({
     resolver: zodResolver(AnswersSchema),
@@ -66,6 +67,41 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     }
   };
 
+  const generateAIAnswer = async () => {
+    if (!authorId) return;
+
+    setIsAISubmitting(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        {
+          method: "POST",
+          body: JSON.stringify({ question }),
+        }
+      );
+
+      const aiAnswer = await response.json();
+
+      if (!response.ok || aiAnswer.error || !aiAnswer.reply) {
+        const errorMessage =
+          aiAnswer.error || "Something went wrong generating the AI response.";
+        throw new Error(errorMessage);
+      }
+      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+
+      if (editorRef.current) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const editor = editorRef.current as any;
+        editor.setContent(formattedAnswer);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsAISubmitting(false);
+    }
+  };
+
   return (
     <div>
       <div className="mt-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
@@ -75,16 +111,17 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
         <Button
           className="btn light-border-2 gap-1.5 rounded-md border-2 border-slate-500 px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
-          onClick={() => {}}
+          onClick={generateAIAnswer}
+          disabled={isAISubmitting}
         >
           <Image
             src="/assets/icons/stars.svg"
             alt="star"
             width={12}
             height={12}
-            className="object-contain"
+            className={`object-contain ${isAISubmitting ? "animate-spin" : ""}`}
           />
-          Generate an AI Answer
+          {isAISubmitting ? "Generating..." : "Generate an AI Answer"}
         </Button>
       </div>
 

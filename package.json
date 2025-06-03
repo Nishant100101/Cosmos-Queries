@@ -30,6 +30,7 @@
     "html-react-parser": "^5.2.2",
     "lucide-react": "^0.447.0",
     "mongoose": "^8.9.5",
+    "openai": "^5.0.1",
     "prettier": "^3.3.3",
     "prismjs": "^1.30.0",
     "query-string": "^9.1.2",
