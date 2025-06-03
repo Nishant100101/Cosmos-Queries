@@ -12,6 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { viewQuestion } from "@/lib/actions/interaction.action";
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.action";
+import { toast } from "sonner";
 
 interface props {
   type: string;
@@ -44,11 +45,20 @@ export const Votes = ({
       questionId: JSON.parse(itemId),
       path: pathname,
     });
+
+    return toast(
+      `Question ${!hasSaved ? "saved in" : "removed from"} your collection`,
+      {
+        className: !hasSaved ? "" : "bg-destructive text-white",
+      }
+    );
   };
 
   const handleVote = async (action: string) => {
     if (!userId) {
-      return;
+      return toast.warning("Please log in", {
+        description: "You must be logged in to perform this action",
+      });
     }
 
     if (action === "upvote") {
@@ -69,6 +79,12 @@ export const Votes = ({
           path: pathname,
         });
       }
+
+      toast.info(`Upvote ${!hasupVoted ? "successful" : "removed"}`, {
+        description: !hasupVoted
+          ? "You upvoted this item."
+          : "You removed your upvote.",
+      });
     }
 
     if (action === "downvote") {
@@ -89,7 +105,11 @@ export const Votes = ({
           path: pathname,
         });
       }
-      // Show Toast
+      toast.info(`Downvote ${!hasdownVoted ? "successful" : "removed"}`, {
+        description: !hasdownVoted
+          ? "You downvoted this item."
+          : "You removed your downvote.",
+      });
     }
   };
 
