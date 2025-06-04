@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
 import { SearchParamsProps } from "@/types";
 import Filter from "@/components/shared/Filter";
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,10 @@ import NoResult from "@/components/shared/NoResult";
 import { HomePageFilters } from "@/constants/filters";
 import HomeFilters from "@/components/home/HomeFilters";
 import QuestionCard from "@/components/cards/QuestionCard";
-import { getQuestions } from "@/lib/actions/question.action";
+import {
+  getQuestions,
+  getRecommendedQuestions,
+} from "@/lib/actions/question.action";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Pagination from "@/components/shared/Pagination";
 import type { Metadata } from "next";
@@ -37,13 +41,29 @@ export const metadata: Metadata = {
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { q, filter, page } = await searchParams;
+  const { userId } = await auth();
 
-  const result = await getQuestions({
-    searchQuery: q,
-    filter,
-    page: page ? +page : 1,
-  });
-
+  let result;
+  if (filter === "recommended") {
+    if (userId) {
+      result = await getRecommendedQuestions({
+        userId,
+        searchQuery: q,
+        page: page ? +page : 1,
+      });
+    } else {
+      result = {
+        questions: [],
+        isNext: false,
+      };
+    }
+  } else {
+    result = await getQuestions({
+      searchQuery: q,
+      filter,
+      page: page ? +page : 1,
+    });
+  }
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">

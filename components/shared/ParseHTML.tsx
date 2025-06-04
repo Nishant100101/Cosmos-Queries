@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import React, { useEffect, useState } from "react";
 
 import Prism from "prismjs";
 import parse from "html-react-parser";
@@ -33,9 +34,28 @@ interface Props {
 }
 
 const ParseHTML = ({ data }: Props) => {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     Prism.highlightAll();
+    setMounted(true);
   }, []);
+
+  if (!mounted)
+    return (
+      <div className="flex flex-col space-y-3">
+        <div className="space-y-2">
+          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+        </div>
+        <div className="space-y-2">
+          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+          <Skeleton className="background-light800_dark300 h-[125px] w-full rounded" />
+          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+        </div>
+      </div>
+    );
 
   return <div className={"markdown w-full min-w-full"}>{parse(data)}</div>;
 };
