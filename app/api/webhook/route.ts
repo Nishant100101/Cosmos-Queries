@@ -96,5 +96,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Ok", user: deletedUser });
   }
 
-  return new Response("Webhook received", { status: 200 });
+  return NextResponse.json({ message: "Ok" });
 }

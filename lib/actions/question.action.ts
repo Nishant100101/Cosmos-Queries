@@ -290,7 +290,7 @@ export async function getRecommendedQuestions(params: RecommendedParams) {
     const skipAmount = (page - 1) * pageSize;
 
     const userInteractions = await Interaction.find({ user: user._id })
-      .populate("tags")
+      .populate({ path: "tags", model: Tag })
       .exec();
 
     const userTags = userInteractions.reduce((tags, interaction) => {
