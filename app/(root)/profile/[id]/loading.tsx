@@ -5,7 +5,7 @@ const Loading = () => {
     <div className="flex flex-col gap-10">
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
         <div className="flex flex-col items-start gap-4 lg:flex-row">
-          <Skeleton className="background-light800_darkgradient h-[140px] w-[140px] rounded-full" />
+          <Skeleton className="background-light800_darkgradient h-[140px] w-[140px] mt-4 rounded-full" />
 
           <div className="mt-3 space-y-3">
             <Skeleton className="background-light800_darkgradient h-7 w-48 rounded-md" />

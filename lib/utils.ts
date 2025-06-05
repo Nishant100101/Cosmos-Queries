@@ -115,6 +115,8 @@ interface BadgeParam {
   }[];
 }
 
+type BadgeLevel = "GOLD" | "SILVER" | "BRONZE";
+
 export const assignBadges = (params: BadgeParam) => {
   const badgeCounts: BadgeCounts = {
     GOLD: 0,
@@ -126,13 +128,12 @@ export const assignBadges = (params: BadgeParam) => {
 
   criteria.forEach((item) => {
     const { type, count } = item;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const badgeLevels: any = BADGE_CRITERIA[type];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Object.keys(badgeLevels).forEach((level: any) => {
+    const badgeLevels = BADGE_CRITERIA[type] as Record<BadgeLevel, number>;
+
+    (Object.keys(badgeLevels) as BadgeLevel[]).forEach((level) => {
       if (count >= badgeLevels[level]) {
-        badgeCounts[level as keyof BadgeCounts] += 1;
+        badgeCounts[level] += 1;
       }
     });
   });
