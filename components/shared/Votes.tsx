@@ -46,19 +46,19 @@ export const Votes = ({
       path: pathname,
     });
 
-    return toast(
+    return /* toast(
       `Question ${!hasSaved ? "saved in" : "removed from"} your collection`,
       {
         className: !hasSaved ? "" : "bg-destructive text-white",
       }
-    );
+    ) */;
   };
 
   const handleVote = async (action: string) => {
     if (!userId) {
-      return toast.warning("Please log in", {
+      return /* toast.warning("Please log in", {
         description: "You must be logged in to perform this action",
-      });
+      }) */;
     }
 
     if (action === "upvote") {
@@ -80,11 +80,11 @@ export const Votes = ({
         });
       }
 
-      toast.info(`Upvote ${!hasupVoted ? "successful" : "removed"}`, {
+      /* toast.info(`Upvote ${!hasupVoted ? "successful" : "removed"}`, {
         description: !hasupVoted
           ? "You upvoted this item."
           : "You removed your upvote.",
-      });
+      }) */
     }
 
     if (action === "downvote") {
@@ -105,11 +105,11 @@ export const Votes = ({
           path: pathname,
         });
       }
-      toast.info(`Downvote ${!hasdownVoted ? "successful" : "removed"}`, {
+      /* toast.info(`Downvote ${!hasdownVoted ? "successful" : "removed"}`, {
         description: !hasdownVoted
           ? "You downvoted this item."
           : "You removed your downvote.",
-      });
+      }) */
     }
   };
 
