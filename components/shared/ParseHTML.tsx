@@ -43,16 +43,13 @@ const ParseHTML = ({ data }: Props) => {
 
   if (!mounted)
     return (
-      <div className="flex flex-col space-y-3">
-        <div className="space-y-2">
-          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
-          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+      <div className="flex mb-8 mt-5 flex-col space-y-3 w-full">
+        <div className="space-y-2 w-full">
+          <Skeleton className="background-light800_darkgradient h-6 w-full  rounded" />
         </div>
-        <div className="space-y-2">
-          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
-          <Skeleton className="background-light800_dark300 h-[125px] w-full rounded" />
-          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
-          <Skeleton className="background-light800_dark300 h-6 w-full  rounded" />
+        <Skeleton className="background-light800_darkgradient h-[125px] w-full rounded" />
+        <div className="space-y-2 w-full">
+          <Skeleton className="background-light800_darkgradient h-6 w-[90%] rounded" />
         </div>
       </div>
     );

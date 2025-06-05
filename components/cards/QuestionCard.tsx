@@ -4,7 +4,6 @@ import RenderTag from "../shared/RenderTag";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import EditDeleteAction from "../shared/EditDeleteAction";
-// import EditDeleteAction from "../shared/EditDeleteAction";
 
 export interface QuestionProps {
   _id: string;

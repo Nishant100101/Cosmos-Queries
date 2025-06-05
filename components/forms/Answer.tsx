@@ -1,9 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
-
 import { z } from "zod";
 import {
   Form,
@@ -56,7 +52,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
       form.reset();
 
       if (editorRef.current) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const editor = editorRef.current as any;
         editor.setContent("");
       }
@@ -139,7 +134,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
                   <Editor
                     apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                     onInit={(evt, editor) => {
-                      // @ts-expect-error Ignore TypeScript error for editor type mismatch
                       editorRef.current = editor;
                     }}
                     onBlur={field.onBlur}

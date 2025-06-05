@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -158,7 +157,6 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) => {
-                    // @ts-expect-error Ignore TypeScript error for editor type mismatch
                     editorRef.current = editor;
                   }}
                   onBlur={field.onBlur}
