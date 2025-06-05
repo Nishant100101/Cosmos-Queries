@@ -12,7 +12,9 @@ export const connectToDatabase = async () => {
   if (isConnected) return;
 
   try {
-    mongoose.connect(process.env.MONGODB_URL, { dbName: "Cosmos-Queries" });
+    await mongoose.connect(process.env.MONGODB_URL, {
+      dbName: "Cosmos-Queries",
+    });
     isConnected = true;
     // console.log("Connected to Database");
   } catch (err) {
