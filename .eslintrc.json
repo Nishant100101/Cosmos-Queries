@@ -1,9 +1,34 @@
 {
+  "root": true,
   "extends": [
     "next/core-web-vitals",
-    "next/typescript",
-    "standard",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:tailwindcss/recommended",
     "prettier"
-  ]
+  ],
+  "plugins": ["@typescript-eslint", "tailwindcss"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": ".",
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-unused-vars": "off",
+    "no-useless-return": "warn"
+  }
 }

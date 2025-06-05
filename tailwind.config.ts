@@ -3,6 +3,7 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  safelist: ["toaster"],
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
