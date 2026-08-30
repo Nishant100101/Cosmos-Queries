@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cosmos Queries
 
-## Getting Started
+A full-stack community platform where users can ask questions, share knowledge, participate in discussions, and engage with content through voting.
 
-First, run the development server:
+## 🚀 Overview
+
+Cosmos Queries is designed to create a collaborative space for learning and knowledge sharing. The application focuses on providing an intuitive experience for exploring questions, contributing answers, and engaging with a community.
+
+**Live Demo:** YOUR_LIVE_DEMO_LINK
+
+## ✨ Features
+
+* Ask and explore questions
+* Share answers and participate in discussions
+* Community-driven voting and engagement
+* Browse and discover content
+* Responsive user interface
+* User authentication and protected functionality
+
+> Update this section to match the features currently implemented in the project.
+
+## 🛠️ Tech Stack
+
+### Frontend & Application
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+### Backend & Data
+
+Add the backend, database, authentication, and other services actually used by this project here.
+
+## 📂 Project Structure
+
+```text
+app/          # Application routes and pages
+components/   # Reusable UI components
+constants/    # Application constants
+context/      # React context and shared state
+database/     # Database-related logic
+lib/          # Utility functions and shared libraries
+public/       # Static assets
+styles/       # Application styles
+types/        # TypeScript type definitions
+```
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+* Node.js
+* npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Nishant100101/Cosmos-Queries.git
+```
+
+Move into the project directory:
+
+```bash
+cd Cosmos-Queries
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create your environment variables file and add the required configuration.
+
+Then start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file and add the required environment variables.
 
-## Learn More
+```env
+# Add your environment variables here
+```
 
-To learn more about Next.js, take a look at the following resources:
+Refer to the project source code to determine the exact variables required for local development.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 What This Project Demonstrates
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project demonstrates my work with:
 
-## Deploy on Vercel
+* Building full-stack applications with Next.js
+* Developing reusable React components
+* TypeScript-based application development
+* Application state and context management
+* Database integration
+* Responsive UI development
+* Structuring a maintainable web application
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📌 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Potential areas for future development include improving features, scalability, performance, and the overall community experience.
+
+If you found this project interesting, feel free to explore the repository and share your feedback.
