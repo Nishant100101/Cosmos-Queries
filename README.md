@@ -83,14 +83,6 @@ npm run dev
 
 Open `http://localhost:3000` in your browser.
 
-## 🔐 Environment Variables
-
-Create a `.env.local` file and add the required environment variables.
-
-```env
-# Add your environment variables here
-```
-
 Refer to the project source code to determine the exact variables required for local development.
 
 ## 🎯 What This Project Demonstrates
