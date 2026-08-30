@@ -6,8 +6,6 @@ A full-stack community platform where users can ask questions, share knowledge, 
 
 Cosmos Queries is designed to create a collaborative space for learning and knowledge sharing. The application focuses on providing an intuitive experience for exploring questions, contributing answers, and engaging with a community.
 
-**Live Demo:** YOUR_LIVE_DEMO_LINK
-
 ## ✨ Features
 
 * Ask and explore questions
@@ -106,9 +104,3 @@ This project demonstrates my work with:
 * Database integration
 * Responsive UI development
 * Structuring a maintainable web application
-
-## 📌 Future Improvements
-
-Potential areas for future development include improving features, scalability, performance, and the overall community experience.
-
-If you found this project interesting, feel free to explore the repository and share your feedback.
