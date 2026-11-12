@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 let isConnected: boolean = false;
 
@@ -15,8 +18,9 @@ export const connectToDatabase = async () => {
     await mongoose.connect(process.env.MONGODB_URL, {
       dbName: "Cosmos-Queries",
     });
+
     isConnected = true;
-    // console.log("Connected to Database");
+    console.log("Connected to Database");
   } catch (err) {
     console.log("Error during connection", err);
   }

@@ -2,6 +2,7 @@
 
 import User from "@/database/user.model";
 import { connectToDatabase } from "../mongoose";
+import { currentUser } from "@clerk/nextjs/server";
 import {
   CreateUserParams,
   DeleteUserParams,
@@ -20,14 +21,44 @@ import Answer from "@/database/answer.model";
 import { BadgeCriteriaType } from "@/types";
 import { assignBadges } from "../utils";
 
+async function ensureMongoUser(clerkId: string) {
+  let user = await User.findOne({ clerkId });
+  if (user) return user;
+
+  const clerkUser = await currentUser();
+  if (!clerkUser || clerkUser.id !== clerkId) return null;
+
+  const email = clerkUser.emailAddresses[0]?.emailAddress || "";
+  const baseUsername =
+    clerkUser.username || email.split("@")[0] || `user_${clerkId.slice(-6)}`;
+
+  const existingByEmail = await User.findOne({ email });
+  if (existingByEmail) {
+    existingByEmail.clerkId = clerkId;
+    existingByEmail.picture = clerkUser.imageUrl || existingByEmail.picture;
+    await existingByEmail.save();
+    return existingByEmail;
+  }
+
+  user = await User.create({
+    clerkId: clerkUser.id,
+    name:
+      `${clerkUser.firstName || ""}${clerkUser.lastName ? ` ${clerkUser.lastName}` : ""}`.trim() ||
+      baseUsername,
+    username: `${baseUsername}_${clerkId.slice(-4)}`,
+    email,
+    picture: clerkUser.imageUrl,
+  });
+
+  return user;
+}
+
 export async function getUserById(params: GetUserByIdParams) {
   try {
     await connectToDatabase();
-
     const { userId } = params;
 
-    const user = await User.findOne({ clerkId: userId });
-
+    const user = await ensureMongoUser(userId);
     return user;
   } catch (error) {
     console.log(error);
@@ -150,13 +181,13 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
       await User.findByIdAndUpdate(
         userId,
         { $pull: { saved: questionId } },
-        { new: true }
+        { new: true },
       );
     } else {
       await User.findByIdAndUpdate(
         userId,
         { $addToSet: { saved: questionId } },
-        { new: true }
+        { new: true },
       );
     }
 
@@ -232,7 +263,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
 
     const { userId } = params;
 
-    const user = await User.findOne({ clerkId: userId });
+    const user = await ensureMongoUser(userId);
 
     if (!user) throw new Error("User not found");
 

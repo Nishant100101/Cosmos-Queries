@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { URLProps } from "@/types";
-import { SignedIn } from "@clerk/nextjs";
+import { Show } from "@clerk/nextjs";
 import { getJoinedDate } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import Stats from "@/components/shared/Stats";
@@ -106,7 +106,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
           </div>
 
           <div className="flex justify-end max-sm:mb-5 max-sm:w-full sm:mt-3">
-            <SignedIn>
+            <Show when="signed-in">
               {clerkId === userInfo.user.clerkId && (
                 <Link href="/profile/edit">
                   <Button className="paragraph-medium btn-secondary text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
@@ -114,7 +114,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
                   </Button>
                 </Link>
               )}
-            </SignedIn>
+            </Show>
           </div>
         </div>
 

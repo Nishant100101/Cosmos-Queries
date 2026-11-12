@@ -1,7 +1,7 @@
 "use client";
 
 import { sidebarLinks } from "@/constants";
-import { SignedOut, useAuth } from "@clerk/nextjs";
+import { Show, useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,49 +9,56 @@ import { Button } from "../ui/button";
 
 const LeftSidebar = () => {
   const pathName = usePathname();
+  const { userId, isLoaded } = useAuth();
 
-  const { userId } = useAuth();
   return (
     <section className="background-light900_dark200 custom-scrollbar light-border sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px]">
       <div className="flex flex-1 flex-col gap-6">
-        {sidebarLinks.map((items) => {
-          const isActive =
-            (pathName.includes(items.route) && items.route.length > 1) ||
-            pathName === items.route;
+        {sidebarLinks.map((item) => {
+          let route = item.route;
 
-          if (items.route === "/profile") {
-            if (userId) {
-              items.route = `${items.route}/${userId}`;
+          if (route === "/profile") {
+            if (isLoaded && userId) {
+              route = `/profile/${userId}`;
             } else {
               return null;
             }
           }
+
+          const isActive =
+            (pathName.includes(item.route) && item.route.length > 1) ||
+            pathName === route;
+
           return (
             <Link
-              key={items.label}
-              className={`
-                ${isActive ? "primary-gradient rounded-xl text-light-900" : "text-dark300_light900"}
-                flex items-center justify-start gap-4 bg-transparent p-4`}
-              href={items.route}
+              key={item.label}
+              className={`${
+                isActive
+                  ? "primary-gradient rounded-xl text-light-900"
+                  : "text-dark300_light900"
+              } flex items-center justify-start gap-4 bg-transparent p-4`}
+              href={route}
             >
               <Image
-                src={items.imgURL}
+                src={item.imgURL}
                 width={20}
                 height={20}
-                alt={items.label}
+                alt={item.label}
                 className={`${isActive ? "" : "invert-colors"}`}
               />
               <p
-                className={`${isActive ? "base-bold" : "base-medium"} max-lg:hidden`}
+                className={`${
+                  isActive ? "base-bold" : "base-medium"
+                } max-lg:hidden`}
               >
-                {items.label}
+                {item.label}
               </p>
             </Link>
           );
         })}
       </div>
 
-      <SignedOut>
+      <Show when="signed-out">
         <div className="flex flex-col gap-3">
           <Link href="/sign-in">
             <Button className="btn-secondary min-h-10 w-full rounded-xl px-4 py-3 text-base font-bold shadow-none">
@@ -81,7 +88,7 @@ const LeftSidebar = () => {
             </Button>
           </Link>
         </div>
-      </SignedOut>
+      </Show>
     </section>
   );
 };

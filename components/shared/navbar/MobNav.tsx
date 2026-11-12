@@ -8,25 +8,36 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { sidebarLinks } from "@/constants";
-import { SignedOut } from "@clerk/nextjs";
+import { Show, useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NavContent = () => {
   const pathname = usePathname();
+  const { userId, isLoaded } = useAuth();
 
   return (
     <>
       {sidebarLinks.map((item) => {
+        let route = item.route;
+
+        if (route === "/profile") {
+          if (isLoaded && userId) {
+            route = `/profile/${userId}`;
+          } else {
+            return null;
+          }
+        }
+
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
-          pathname === item.route;
+          pathname === route;
 
         return (
-          <SheetClose asChild key={item.route}>
+          <SheetClose asChild key={item.label}>
             <Link
-              href={item.route}
+              href={route}
               className={`${
                 isActive
                   ? "primary-gradient rounded-xl text-light-900"
@@ -87,7 +98,7 @@ const MobNav = () => {
             <NavContent />
           </section>
 
-          <SignedOut>
+          <Show when="signed-out">
             <div className="flex flex-col gap-3 align-bottom">
               <SheetClose asChild>
                 <Link href="/sign-in">
@@ -105,7 +116,7 @@ const MobNav = () => {
                 </Link>
               </SheetClose>
             </div>
-          </SignedOut>
+          </Show>
         </div>
       </SheetContent>
     </Sheet>

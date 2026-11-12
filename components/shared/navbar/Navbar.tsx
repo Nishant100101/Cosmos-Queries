@@ -1,4 +1,4 @@
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { Show, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import GlobalSearch from "../search/GlobalSearch";
@@ -26,14 +26,14 @@ const Navbar = () => {
 
       <div className="flex-between gap-5">
         <Theme />
-        <SignedIn>
+        <Show when="signed-in">
           <UserButton
             appearance={{
               elements: { avatarBox: "h-10 w-10" },
               variables: { colorPrimary: "#ff7000" },
             }}
           />
-        </SignedIn>
+        </Show>
         <MobNav />
       </div>
     </nav>
