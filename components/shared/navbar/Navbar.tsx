@@ -1,6 +1,7 @@
 import { Show, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import GlobalSearch from "../search/GlobalSearch";
 import MobNav from "./MobNav";
 import Theme from "./Theme";
@@ -15,17 +16,22 @@ const Navbar = () => {
           width={40}
           height={40}
         />
+
         <p className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden">
           Cosmos
           <span className="text-primary-500">Queries</span>
         </p>
       </Link>
 
-      {/* GlobalSearch */}
-      <GlobalSearch />
+      <Suspense
+        fallback={<div className="w-full max-w-[600px] max-lg:hidden" />}
+      >
+        <GlobalSearch />
+      </Suspense>
 
       <div className="flex-between gap-5">
         <Theme />
+
         <Show when="signed-in">
           <UserButton
             appearance={{
@@ -34,6 +40,7 @@ const Navbar = () => {
             }}
           />
         </Show>
+
         <MobNav />
       </div>
     </nav>
