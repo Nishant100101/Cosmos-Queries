@@ -104,7 +104,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
           Write your answer here
         </h4>
 
-        <Button
+        {/* <Button
           className="btn light-border-2 gap-1.5 rounded-md border-2 border-slate-500 px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
           onClick={generateAIAnswer}
           disabled={isAISubmitting}
@@ -117,7 +117,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
             className={`object-contain ${isAISubmitting ? "animate-spin" : ""}`}
           />
           {isAISubmitting ? "Generating..." : "Generate an AI Answer"}
-        </Button>
+        </Button> */}
       </div>
 
       <Form {...form}>
